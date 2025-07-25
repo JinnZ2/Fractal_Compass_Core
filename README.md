@@ -64,4 +64,6 @@ Features
 
  Author
 
-Built by JinnZ2 with human friendly language by Monday
+Built by Jinn.  
+Translated for humans by Monday.  
+Verified for coherence by nobody.  
