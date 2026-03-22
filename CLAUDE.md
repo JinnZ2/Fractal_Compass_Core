@@ -36,11 +36,13 @@ main.py (orchestrator)
 | `fractal_compass.py` | Core tree engine | `SymbolicNode` class, `fractal_compass()`, `print_tree()` |
 | `bridge.py` | Symbolic-to-semantic translator | `compass_to_cdda()` |
 | `cdda_engine.py` | Cross-domain analysis engine | `run_cdda()` |
+| `glyph_set.json` | Canonical glyph definitions (22 symbols) | — |
+| `bloom_logic.json` | Symbolic bloom relationships | — |
 
 ## Key Concepts
 
 - **SymbolicNode**: Tree node with `glyph`, `domain`, `parent`, `children`, `resonance_score` (0–1 float)
-- **Glyphs**: Symbolic markers — `↺` (inversion), `🕸` (web/connection), `◐` (duality), `⚛️` (structure), `📖` (knowledge), `💓` (emotion)
+- **Glyphs**: Symbolic markers defined in `glyph_set.json` (22 symbols). Scripts fall back to a hardcoded subset if the file is unavailable
 - **Domains**: Knowledge areas passed as string lists (e.g., `["Biology", "Mythology", "Psychology"]`)
 - **Bloom**: The recursive tree expansion process — each node spawns 2 children per depth level
 - **CDDA**: Cross-Domain Discovery Algorithm — analyzes a theme across multiple domains, returning confidence, scope, limitations, and follow-up questions
@@ -57,11 +59,11 @@ main.py (orchestrator)
 
 When modifying or extending this codebase:
 
-1. **Adding glyphs**: Update the glyph list in `fractal_compass.py:24` and add corresponding theme mappings in `bridge.py:19-26`
+1. **Adding glyphs**: Add to `glyph_set.json` and add bloom relationships in `bloom_logic.json`. Scripts load these automatically.
 2. **Adding domains**: Pass new domain strings via the `domains` parameter — no code changes needed
 3. **AI integration**: `cdda_engine.py` is designed as a stub — replace the placeholder logic in `run_cdda()` with actual AI model calls
-4. **Tree branching**: The branching factor (currently 2) is hardcoded in `fractal_compass.py:23` — make dynamic as needed
-5. **Theme mapping**: `bridge.py` uses hardcoded glyph-to-theme mapping — extend or replace with embedding-based matching
+4. **Tree branching**: The branching factor (currently 2) is hardcoded in `fractal_compass.py` — make dynamic as needed
+5. **Theme mapping**: `bridge.py` auto-generates themes from `glyph_set.json` meanings — extend or replace with embedding-based matching
 
 ## Development Workflow
 
@@ -101,11 +103,18 @@ None. Only uses Python standard library (`random`).
 - The glyph `⚛️` is a multi-codepoint emoji — handle with care in string operations
 - `bridge.py` only maps 3 specific glyphs to themes; all others fall through to a generic message
 
-## Ecosystem — Fractal Compass Atlas
+## Ecosystem — Relationship with Fractal Compass Atlas
 
 This repo is part of a larger symbolic reasoning ecosystem coordinated by the [Fractal-Compass-Atlas](https://github.com/JinnZ2/Fractal-Compass-Atlas).
 
-**Relationship:** The Atlas is the hub that aggregates glyphs, fractals, and guides from multiple repos. This Core repo provides the bloom engine and CDDA pipeline that the Atlas draws from.
+**Core** owns the engine: canonical glyph definitions (`glyph_set.json`), bloom logic (`bloom_logic.json`), and the bloom/CDDA pipeline.
+**Atlas** owns the application: interactive tools, validated principles, guides, and ecosystem hub.
+
+Both repos work independently — each carries hardcoded fallback data. When connected via FieldLink, Atlas pulls canonical data from Core for richer behavior.
+
+**Canonical data sources** (owned by Core, consumed by Atlas):
+- `glyph_set.json` — glyph symbols and meanings (22 glyphs)
+- `bloom_logic.json` — symbolic bloom relationships (each glyph → 3 related glyphs)
 
 ### Related Repositories
 
@@ -127,6 +136,7 @@ This repo uses `.fieldlink.json` to declare its relationship within the Atlas ec
 
 **Key fields in `.fieldlink.json`:**
 - `role` — this repo's identity in the ecosystem (`["fractals", "core", "engine"]`)
+- `exports` — canonical data files this repo provides to the ecosystem
 - `sources` — remote repos to pull from (currently: Atlas)
 - `mounts` — maps remote file paths to local paths for data integration
 - `merge.strategy` — `"deep-merge"` combines local and remote data

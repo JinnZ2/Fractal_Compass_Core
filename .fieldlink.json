@@ -4,22 +4,28 @@
     "updated": "2026-03-22T00:00:00Z",
     "role": ["fractals", "core", "engine"],
 
+    "exports": [
+      { "path": "glyph_set.json", "description": "Canonical glyph definitions (22 symbols)" },
+      { "path": "bloom_logic.json", "description": "Symbolic bloom relationships (glyph → related glyphs)" }
+    ],
+
     "sources": [
       {
         "name": "atlas",
         "repo": "https://github.com/JinnZ2/Fractal-Compass-Atlas",
         "ref": "main",
-        "paths": ["fractals/**/*.json", "atlas/**/*.json", "glyphs/**/*.json", "guides/**/*.md"],
+        "paths": ["atlas/**/*.json", "atlas/**/*.md", "guides/**/*.md"],
         "mounts": [
-          { "remote": "atlas/glyphs.json", "as": "atlas/remote/atlas/glyphs.json" },
-          { "remote": "fractals/bloom.json", "as": "atlas/remote/atlas/bloom.json" }
+          { "remote": "atlas/fractal_principles.md", "as": "atlas/remote/atlas/principles.md" }
         ],
         "consent": { "license": "MIT", "share_ok": true }
       }
     ],
 
     "local_manifests": [
-      "*.py"
+      "*.py",
+      "glyph_set.json",
+      "bloom_logic.json"
     ],
 
     "merge": {

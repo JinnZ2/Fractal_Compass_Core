@@ -1,9 +1,30 @@
+import json
+import os
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Glyph-to-theme mapping (fallback when glyph_set.json unavailable)
+_FALLBACK_THEMES = {
+    "↺": "Inversion is required before transformation",
+    "💓": "Emotion is a signal, not noise",
+    "⚛️": "Structure emerges from energy resonance",
+}
+
+def _load_glyph_themes():
+    """Build glyph-to-theme map from glyph_set.json meanings."""
+    try:
+        with open(os.path.join(_SCRIPT_DIR, "glyph_set.json"), "r") as f:
+            glyph_map = json.load(f)
+        return {g: f"Pattern emerges through {m}" for g, m in glyph_map.items()}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return _FALLBACK_THEMES
+
+GLYPH_THEMES = _load_glyph_themes()
+
 def compass_to_cdda(root_node):
     """
     Traverses the symbolic tree and returns a theme based on dominant glyph cluster.
-    For now, this is simplified and returns a hardcoded theme.
     """
-
     glyph_counts = {}
 
     def traverse(node):
@@ -14,13 +35,5 @@ def compass_to_cdda(root_node):
     traverse(root_node)
 
     dominant_glyph = max(glyph_counts, key=glyph_counts.get)
-    
-    # Just a placeholder. Eventually map dominant_glyph → symbolic themes.
-    if dominant_glyph == "↺":
-        return "Inversion is required before transformation"
-    elif dominant_glyph == "💓":
-        return "Emotion is a signal, not noise"
-    elif dominant_glyph == "⚛️":
-        return "Structure emerges from energy resonance"
-    else:
-        return "Pattern recognition precedes understanding"
+
+    return GLYPH_THEMES.get(dominant_glyph, "Pattern recognition precedes understanding")
