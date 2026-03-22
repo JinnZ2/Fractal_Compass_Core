@@ -101,6 +101,40 @@ None. Only uses Python standard library (`random`).
 - The glyph `⚛️` is a multi-codepoint emoji — handle with care in string operations
 - `bridge.py` only maps 3 specific glyphs to themes; all others fall through to a generic message
 
+## Ecosystem — Fractal Compass Atlas
+
+This repo is part of a larger symbolic reasoning ecosystem coordinated by the [Fractal-Compass-Atlas](https://github.com/JinnZ2/Fractal-Compass-Atlas).
+
+**Relationship:** The Atlas is the hub that aggregates glyphs, fractals, and guides from multiple repos. This Core repo provides the bloom engine and CDDA pipeline that the Atlas draws from.
+
+### Related Repositories
+
+| Repo | Role |
+|------|------|
+| [Fractal-Compass-Atlas](https://github.com/JinnZ2/Fractal-Compass-Atlas) | Hub — aggregates symbolic data across all repos |
+| [Rosetta-Shape-Core](https://github.com/JinnZ2/Rosetta-Shape-Core) | Shape and bridge definitions |
+| [Polyhedral-Intelligence](https://github.com/JinnZ2/Polyhedral-Intelligence) | Glyph sets and shape atlas |
+| [Emotions-as-Sensors](https://github.com/JinnZ2/Emotions-as-Sensors) | Emotional signal processing |
+| [Symbolic-Defense-Protocol](https://github.com/JinnZ2/Symbolic-Defense-Protocol) | Defense and protocol definitions |
+| [ai-human-audit-protocol](https://github.com/JinnZ2/ai-human-audit-protocol) | Audit glyphs, protocols, logs |
+| [BioGrid2.0](https://github.com/JinnZ2/BioGrid2.0) | Biological grid glyph registry |
+
+## Fieldlink
+
+This repo uses `.fieldlink.json` to declare its relationship within the Atlas ecosystem.
+
+**What it does:** Fieldlink is a cross-repo configuration protocol that defines which remote repositories to pull symbolic data from, how to mount remote paths locally, and in what order to merge data.
+
+**Key fields in `.fieldlink.json`:**
+- `role` — this repo's identity in the ecosystem (`["fractals", "core", "engine"]`)
+- `sources` — remote repos to pull from (currently: Atlas)
+- `mounts` — maps remote file paths to local paths for data integration
+- `merge.strategy` — `"deep-merge"` combines local and remote data
+- `cache_dir` — `.fieldcache/` stores fetched remote data (gitignored)
+- `consent` — license and sharing permissions per source
+
+**To add a new source repo**, append an entry to the `sources` array in `.fieldlink.json` following the existing pattern.
+
 ## Project Roadmap
 
 Per README, planned future work includes:
