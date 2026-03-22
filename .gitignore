@@ -26,6 +26,9 @@ Thumbs.db
 # Logs & junk
 *.log
 
+# Fieldlink cache
+.fieldcache/
+
 # Sensitive config (optional)
 .env
 secrets.json
