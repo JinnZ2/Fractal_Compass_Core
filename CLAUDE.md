@@ -497,3 +497,7 @@ if __name__ == "__main__":
     # Serialize for persistence
     serialized = agent.serialize()
     print(f"\nAgent serialized. Map size: {len(serialized['map']['resonances'])} resonances")
+
+## License and provenance
+
+Owner-authored repository material is dedicated under CC0 1.0 Universal; see `LICENSE`. The prior MIT legal text and transition record are retained in `LICENSE_HISTORY.md`. Do not relicense vendored or upstream material: it retains its own terms. The configured remote FieldLink source at `fieldlink.sources[0]` remains an untracked MIT-consented source and is not part of this repository's CC0 dedication.
