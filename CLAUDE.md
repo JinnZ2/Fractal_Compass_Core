@@ -8,6 +8,22 @@ python3 main.py
 
 No dependencies required — pure Python 3.9+ standard library only.
 
+
+<!-- clone-refspec-note v1.1 -->
+## Cloning and pushing
+Shallow clones are single-branch by default.
+Before pushing any branch other than the default
+branch, run:
+
+    git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+    git fetch --depth 1
+
+Or clone with: git clone --depth 1 --no-single-branch <url>
+Without this, the first push of a new branch
+fails the tracking-ref check even when the
+commit landed.
+<!-- /clone-refspec-note v1.1 -->
+
 ## Project Overview
 
 A prototype symbolic reasoning engine that builds recursive glyph-based trees ("blooms") and analyzes emergent themes across multiple knowledge domains using a Cross-Domain Discovery Algorithm (CDDA).
@@ -481,3 +497,7 @@ if __name__ == "__main__":
     # Serialize for persistence
     serialized = agent.serialize()
     print(f"\nAgent serialized. Map size: {len(serialized['map']['resonances'])} resonances")
+
+## License and provenance
+
+Owner-authored repository material is dedicated under CC0 1.0 Universal; see `LICENSE`. The prior MIT legal text and transition record are retained in `LICENSE_HISTORY.md`. Do not relicense vendored or upstream material: it retains its own terms. The configured remote FieldLink source at `fieldlink.sources[0]` remains an untracked MIT-consented source and is not part of this repository's CC0 dedication.

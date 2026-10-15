@@ -1,3 +1,5 @@
+Read [READ_ME_THIS_WAY.md](READ_ME_THIS_WAY.md) first.
+
 # Fractal Compass + CDDA Core
 
 A recursive symbolic engine for exploring deep conceptual patterns across multiple domains using glyphs, mandalas, and cross-domain reasoning.
@@ -67,3 +69,7 @@ Features
 Built by Jinn.  
 Translated for humans by Monday.  
 Verified for coherence by nobody.  
+
+## License
+
+Owner-authored material in this repository is dedicated to the public domain under [CC0 1.0 Universal](LICENSE). Configured or later-added third-party material keeps its own terms; see [LICENSE_HISTORY.md](LICENSE_HISTORY.md) for the retained MIT history and provenance exceptions.
